@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rivepod_tutorial/data/models.dart';
 import 'package:http/http.dart' as http;
 
-class ToDoApp extends StatelessWidget {
+import 'package:rivepod_tutorial/config/config.dart';
+import 'package:rivepod_tutorial/data/test_models.dart';
+
+class ToDoApp extends ConsumerWidget {
   const ToDoApp({super.key});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final routeConfig = ref.watch(routesProvider);
+    return MaterialApp.router(
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Demo3(),
+     routerConfig: routeConfig,
     );
   }
 }
