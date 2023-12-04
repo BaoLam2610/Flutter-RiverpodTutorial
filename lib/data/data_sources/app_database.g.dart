@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `task` (`id` INTEGER, `title` TEXT, `note` TEXT, `time` TEXT, `date` TEXT, `isCompleted` INTEGER, `categoryType` INTEGER, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `task` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT, `note` TEXT, `time` TEXT, `date` TEXT, `isCompleted` INTEGER, `categoryType` INTEGER)');
 
         await callback?.onCreate?.call(database, version);
       },

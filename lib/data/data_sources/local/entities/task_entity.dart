@@ -5,8 +5,9 @@ import 'package:rivepod_tutorial/domain/models/models.dart';
 
 import 'package:rivepod_tutorial/utils/app_keys.dart';
 
-@Entity(tableName: AppKeys.tableName, primaryKeys: [AppKeys.id])
+@Entity(tableName: AppKeys.tableName)
 class TaskEntity {
+  @PrimaryKey(autoGenerate: true)
   final int? id;
   final String? title;
   final String? note;

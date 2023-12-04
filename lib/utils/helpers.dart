@@ -19,4 +19,8 @@ class Helpers {
       return '12:00 pm';
     }
   }
+
+  static String dateToString(DateTime date) {
+    return DateFormat.yMMMd().format(date);
+  }
 }

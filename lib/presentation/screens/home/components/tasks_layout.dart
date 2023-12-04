@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rivepod_tutorial/presentation/screens/home/components/task_tile.dart';
 import 'package:rivepod_tutorial/presentation/screens/screens.dart';
+import 'package:rivepod_tutorial/providers/task/task_provider.dart';
+import 'package:rivepod_tutorial/utils/app_alerts.dart';
 
 import '../../../../domain/models/models.dart';
 
-class TasksLayout extends StatelessWidget {
+class TasksLayout extends ConsumerWidget {
   final List<Task> tasks;
   final bool isCompletedTasks;
 
@@ -15,7 +18,7 @@ class TasksLayout extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(12),
@@ -23,11 +26,11 @@ class TasksLayout extends StatelessWidget {
         color: Colors.blue[50],
         borderRadius: BorderRadius.circular(20),
       ),
-      child: _buildLayout(),
+      child: _buildLayout(ref),
     );
   }
 
-  _buildLayout() {
+  _buildLayout(WidgetRef ref) {
     final emptyTaskMessage = isCompletedTasks
         ? 'There is no completed task yet'
         : 'There is no task to do!';
@@ -44,6 +47,11 @@ class TasksLayout extends StatelessWidget {
           final task = tasks[index];
           return TaskTile(
             task: task,
+            onDeleteTask: (task) => AppAlerts.showAlertDialog(
+              context,
+              title: 'Are you sure about this?',
+              onAccept: () => ref.read(taskProvider.notifier).deleteTask(task),
+            ),
             onOpenTaskDetail: (task) => _openTaskDetail(context, task),
           );
         },

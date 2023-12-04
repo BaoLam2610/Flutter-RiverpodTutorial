@@ -6,7 +6,7 @@ import 'package:rivepod_tutorial/utils/extensions.dart';
 import '../../../../domain/models/models.dart';
 
 class TaskTile extends StatefulWidget {
-  final Function()? onDeleteTask;
+  final Function(Task task)? onDeleteTask;
   final Function(Task task)? onOpenTaskDetail;
   final Task task;
 
@@ -71,7 +71,7 @@ class _TaskTileState extends State<TaskTile> {
 
   void _onDeleteTask() {
     if (widget.onDeleteTask != null) {
-      widget.onDeleteTask!();
+      widget.onDeleteTask!(widget.task);
     }
   }
 

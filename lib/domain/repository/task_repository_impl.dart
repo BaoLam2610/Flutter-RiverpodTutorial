@@ -20,7 +20,11 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<List<Task>> getTasks() {
     return database.dao.getTasks().then(
-          (value) => value.map((e) => e.toDomain()).toList(),
+          (value) => value
+              .map(
+                (e) => e.toDomain(),
+              )
+              .toList(),
         );
   }
 }
